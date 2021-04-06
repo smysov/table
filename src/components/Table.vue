@@ -1,49 +1,26 @@
 <template>
-  <div class="table-wrapper"
-    ><table class="table-info">
-      <thead>
-        <tr>
-          <th class="table-info__title">
-            Название ресторана
-          </th>
-          <th class="table-info__title">
-            Адрес ресторана
-          </th>
-          <th class="table-info__title">
-            Номер ресторана
-          </th>
-          <th class="table-info__title">
-            Город
-          </th>
-          <th class="table-info__title">
-            Дата инспекции
-          </th>
-          <th class="table-info__title">
-            Статус инспекции
-          </th>
-        </tr>
-      </thead>
+  <div class="table-wrapper">
+    <table class="table-info">
+      <!--Header-->
+      <table-header />
       <!--Body-->
       <restaurants :restaurants="restaurants" />
-      <tfoot>
-        <tr>
-          <td class="table-info__quantity" colspan="6"
-            >Всего элементов: {{ restaurantsLength }}</td
-          >
-        </tr>
-      </tfoot>
+      <!--Footer-->
+      <table-footer :restaurants="restaurants" />
     </table>
   </div>
 </template>
 
 <script>
 import Restaurants from '@/components/Restaurants.vue';
+import TableHeader from '@/components/TableHeader.vue';
+import TableFooter from '@/components/TableFooter.vue';
 
 export default {
   name: 'Table',
-  components: { Restaurants },
+  components: { Restaurants, TableHeader, TableFooter },
   data: () => ({
-    restaurants: null,
+    restaurants: [],
   }),
   async mounted() {
     try {
@@ -54,11 +31,6 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
-  computed: {
-    restaurantsLength() {
-      return this.restaurants.length;
-    },
   },
 };
 </script>

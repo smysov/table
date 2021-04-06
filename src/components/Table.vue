@@ -3,15 +3,17 @@
     <!-- <header-opportunities /> -->
     <header-opportunities
       @onShowParameters="onShowParameters"
+      @search="search = $event"
       :isShowParameters="isShowParameters"
+      :value="search"
     />
     <table class="table-info" @click="isShowParameters = false">
       <!--Header-->
       <table-header />
       <!--Body-->
-      <restaurants :restaurants="restaurants" />
+      <restaurants :restaurants="searchByParameters" />
       <!--Footer-->
-      <table-footer :restaurants="restaurants" />
+      <table-footer :restaurants="searchByParameters" />
     </table>
   </div>
 </template>
@@ -33,6 +35,7 @@ export default {
   data: () => ({
     restaurants: [],
     isShowParameters: false,
+    search: '',
   }),
   async mounted() {
     try {
@@ -42,6 +45,39 @@ export default {
     } catch (error) {
       console.log(error);
     }
+  },
+  computed: {
+    searchByParameters() {
+      const { search, restaurants } = this;
+      const value = search.trim().toLowerCase();
+
+      if (!search) return restaurants;
+
+      const sortedRestaurants = restaurants.filter((item) => {
+        if (item.business_name.toLowerCase().indexOf(value) !== -1) {
+          return item;
+        }
+        if (item.business_address.toLowerCase().indexOf(value) !== -1) {
+          return item;
+        }
+        if (item.business_city.toLowerCase().indexOf(value) !== -1) {
+          return item;
+        }
+        if (item.business_phone_number.toLowerCase().indexOf(value) !== -1) {
+          return item;
+        }
+        if (item.inspection_date.toLowerCase().indexOf(value) !== -1) {
+          return item;
+        }
+        if (item.inspection_description.toLowerCase().indexOf(value) !== -1) {
+          return item;
+        }
+        if (item.inspection_type.toLowerCase().indexOf(value) !== -1) {
+          return item;
+        }
+      });
+      return sortedRestaurants;
+    },
   },
   methods: {
     onShowParameters() {
@@ -53,7 +89,6 @@ export default {
 
 <style lang="scss">
 .table-wrapper {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

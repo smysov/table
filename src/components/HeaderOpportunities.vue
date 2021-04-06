@@ -15,6 +15,7 @@
       class="header-table__search"
       type="text"
       placeholder="Поиск по полям таблицы"
+      v-model="search"
     />
   </div>
 </template>
@@ -29,6 +30,15 @@ export default {
       type: Boolean,
       required: true,
     },
+    value: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      search: this.value,
+    };
   },
   components: {
     EditList,
@@ -37,6 +47,11 @@ export default {
   methods: {
     onShowParameters() {
       this.$emit('onShowParameters');
+    },
+  },
+  watch: {
+    search(value) {
+      this.$emit('search', value);
     },
   },
 };
@@ -102,7 +117,8 @@ export default {
 .opacity-leave-active {
   transition: all 0.3s linear;
 }
-.opacity-enter, .opacity-leave-to {
+.opacity-enter,
+.opacity-leave-to {
   transform: translateY(25px);
   opacity: 0;
 }

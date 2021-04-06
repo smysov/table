@@ -5,7 +5,7 @@
         {{ restaurant.business_name }}
       </td>
       <td class="table-info__descripthion">
-        {{ restaurant.business_location }}
+        {{ restaurant.business_address }}
       </td>
       <td class="table-info__descripthion">
         {{ restaurant.business_city }}

@@ -18,3 +18,11 @@ export default {
   components: { Table },
 };
 </script>
+
+<style lang="scss">
+.restaurants {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+</style>

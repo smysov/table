@@ -1,6 +1,11 @@
 <template>
   <div class="table-wrapper">
-    <table class="table-info">
+    <!-- <header-opportunities /> -->
+    <header-opportunities
+      @onShowParameters="onShowParameters"
+      :isShowParameters="isShowParameters"
+    />
+    <table class="table-info" @click="isShowParameters = false">
       <!--Header-->
       <table-header />
       <!--Body-->
@@ -15,22 +20,33 @@
 import Restaurants from '@/components/Restaurants.vue';
 import TableHeader from '@/components/TableHeader.vue';
 import TableFooter from '@/components/TableFooter.vue';
+import HeaderOpportunities from '@/components/HeaderOpportunities.vue';
 
 export default {
   name: 'Table',
-  components: { Restaurants, TableHeader, TableFooter },
+  components: {
+    Restaurants,
+    TableHeader,
+    TableFooter,
+    HeaderOpportunities,
+  },
   data: () => ({
     restaurants: [],
+    isShowParameters: false,
   }),
   async mounted() {
     try {
       const response = await fetch('/data/restaurants.json');
       const data = await response.json();
       this.restaurants = data;
-      console.log(this.restaurants);
     } catch (error) {
       console.log(error);
     }
+  },
+  methods: {
+    onShowParameters() {
+      this.isShowParameters = !this.isShowParameters;
+    },
   },
 };
 </script>
@@ -39,16 +55,17 @@ export default {
 .table-wrapper {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  border: 1px solid #000;
+  max-width: 1334px;
+  margin: 0 auto;
 }
 
 .table-info {
   font-weight: 400;
   text-align: center;
-  border: 1px solid #000;
   border-collapse: collapse;
-  max-width: 1334px;
 
   &__title {
     position: relative;

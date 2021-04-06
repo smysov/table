@@ -1,14 +1,11 @@
 <template>
   <thead>
-    <tr>
+    <tr class="table-info">
       <th class="table-info__title">
         Название ресторана
       </th>
       <th class="table-info__title">
         Адрес ресторана
-      </th>
-      <th class="table-info__title">
-        Номер ресторана
       </th>
       <th class="table-info__title">
         Город
@@ -24,6 +21,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'TableHeader',
 };

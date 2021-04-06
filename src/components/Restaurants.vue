@@ -8,9 +8,6 @@
         {{ restaurant.business_location }}
       </td>
       <td class="table-info__descripthion">
-        {{ restaurant.business_phone_number || 'Not found' }}
-      </td>
-      <td class="table-info__descripthion">
         {{ restaurant.business_city }}
       </td>
       <td class="table-info__descripthion">

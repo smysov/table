@@ -16,6 +16,9 @@
       <th class="table-info__title">
         Статус инспекции
       </th>
+      <th class="table-info__title table-info__title_delete">
+        X
+      </th>
     </tr>
   </thead>
 </template>

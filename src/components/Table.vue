@@ -1,6 +1,5 @@
 <template>
   <div class="table-wrapper">
-    <!-- <header-opportunities /> -->
     <header-opportunities
       @onShowParameters="onShowParameters"
       @search="search = $event"
@@ -11,7 +10,7 @@
       <!--Header-->
       <table-header />
       <!--Body-->
-      <restaurants :restaurants="searchByParameters" />
+      <restaurants :restaurants="searchByParameters" @deleteInfo="deleteInfo" />
       <!--Footer-->
       <table-footer :restaurants="searchByParameters" />
     </table>
@@ -39,7 +38,7 @@ export default {
   props: {
     restaurants: {
       type: Array,
-      default: () => [],
+      default: () => ([]),
     },
   },
   computed: {
@@ -77,6 +76,9 @@ export default {
     onShowParameters() {
       this.isShowParameters = !this.isShowParameters;
     },
+    deleteInfo(index) {
+      this.restaurants.splice(index, 1);
+    },
   },
 };
 </script>
@@ -105,6 +107,11 @@ export default {
     color: #000;
     border-top: 1px solid rgba(0, 0, 0, 1);
     border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+
+    &_delete {
+      font-weight: 700;
+      color: crimson;
+    }
 
     &::before {
       position: absolute;
@@ -150,6 +157,19 @@ export default {
     font-size: 16px;
     text-align: right;
     padding: 10px 30px 10px 0;
+  }
+
+  &__hide {
+    position: relative;
+    height: 25px;
+    width: 25px;
+    border: none;
+    border-radius: 50%;
+    background: url(../assets/images/cross-hide.svg) center center no-repeat;
+    background-color: crimson;
+    cursor: pointer;
+    outline-color: crimson;
+    outline-offset: 3px;
   }
 }
 </style>

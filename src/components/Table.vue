@@ -33,49 +33,43 @@ export default {
     HeaderOpportunities,
   },
   data: () => ({
-    restaurants: [],
     isShowParameters: false,
     search: '',
   }),
-  async mounted() {
-    try {
-      const response = await fetch('/data/restaurants.json');
-      const data = await response.json();
-      this.restaurants = data;
-    } catch (error) {
-      console.log(error);
-    }
+  props: {
+    restaurants: {
+      type: Array,
+      default: () => [],
+    },
   },
   computed: {
     searchByParameters() {
       const { search, restaurants } = this;
-      const value = search.trim().toLowerCase();
+      const value = search.trim().toUpperCase();
 
       if (!search) return restaurants;
 
       const sortedRestaurants = restaurants.filter((item) => {
-        if (item.business_name.toLowerCase().indexOf(value) !== -1) {
+        if (item.business_name.indexOf(value) !== -1) {
           return item;
         }
-        if (item.business_address.toLowerCase().indexOf(value) !== -1) {
+        if (item.business_address.indexOf(value) !== -1) {
           return item;
         }
-        if (item.business_city.toLowerCase().indexOf(value) !== -1) {
+        if (item.business_city.indexOf(value) !== -1) {
           return item;
         }
-        if (item.business_phone_number.toLowerCase().indexOf(value) !== -1) {
+        if (item.business_phone_number.indexOf(value) !== -1) {
           return item;
         }
-        if (item.inspection_date.toLowerCase().indexOf(value) !== -1) {
+        if (item.inspection_date.indexOf(value) !== -1) {
           return item;
         }
-        if (item.inspection_description.toLowerCase().indexOf(value) !== -1) {
-          return item;
-        }
-        if (item.inspection_type.toLowerCase().indexOf(value) !== -1) {
+        if (item.inspection_description.indexOf(value) !== -1) {
           return item;
         }
       });
+
       return sortedRestaurants;
     },
   },
@@ -106,6 +100,7 @@ export default {
     position: relative;
     font-size: 24px;
     font-weight: 400;
+    width: 20%;
     padding: 15px 17px;
     color: #000;
     border-top: 1px solid rgba(0, 0, 0, 1);
@@ -130,6 +125,7 @@ export default {
   &__descripthion {
     position: relative;
     font-size: 20px;
+    text-transform: uppercase;
     padding: 15px 18px;
     color: #1f1f1f;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);

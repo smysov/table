@@ -49,22 +49,14 @@ export default {
       if (!search) return restaurants;
 
       const sortedRestaurants = restaurants.filter((item) => {
-        if (item.business_name.indexOf(value) !== -1) {
-          return item;
-        }
-        if (item.business_address.indexOf(value) !== -1) {
-          return item;
-        }
-        if (item.business_city.indexOf(value) !== -1) {
-          return item;
-        }
-        if (item.business_phone_number.indexOf(value) !== -1) {
-          return item;
-        }
-        if (item.inspection_date.indexOf(value) !== -1) {
-          return item;
-        }
-        if (item.inspection_description.indexOf(value) !== -1) {
+        if (
+          item.business_name.indexOf(value) !== -1
+          || item.business_address.indexOf(value) !== -1
+          || item.business_city.indexOf(value) !== -1
+          || item.business_phone_number.indexOf(value) !== -1
+          || item.inspection_date.indexOf(value) !== -1
+          || item.inspection_description.indexOf(value) !== -1
+        ) {
           return item;
         }
       });

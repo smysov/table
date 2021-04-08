@@ -1,11 +1,9 @@
 <template>
-  <tfoot>
-    <tr>
-      <td class="table-info__quantity" colspan="7">
-        Всего элементов: {{ restaurantsLength }}
-      </td>
-    </tr>
-  </tfoot>
+  <tr>
+    <td class="table-info__quantity" colspan="7">
+      Всего элементов: {{ restaurantsLength }}
+    </td>
+  </tr>
 </template>
 
 <script>

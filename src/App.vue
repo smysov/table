@@ -3,12 +3,7 @@
     <div class="wrapper__content">
       <section class="restaurants">
         <div class="container">
-          <add-new-restaurants
-            @onSubmit="onSubmit"
-            :restaurant="restaurant"
-            :messageValidation="messageValidation"
-          />
-          <Table :restaurants="restaurants" />
+          <main-table v-bind="{ restaurants, fields }" />
         </div>
       </section>
     </div>
@@ -16,23 +11,44 @@
 </template>
 
 <script>
-import Table from '@/components/Table.vue';
-import AddNewRestaurants from '@/components/AddNewRestaurants.vue';
+import MainTable from '@/components/Table.vue';
 
 export default {
   name: 'App',
-  components: { Table, AddNewRestaurants },
+  components: { MainTable },
   data() {
     return {
       restaurants: [],
-      restaurant: {
-        name: '',
-        address: '',
-        city: '',
-        date: '',
-        description: '',
-      },
-      messageValidation: '',
+      fields: [
+        {
+          key: 'business_name',
+          name: 'Название ресторана',
+        },
+        {
+          key: 'business_address',
+          name: 'Адрес ресторана',
+        },
+        {
+          key: 'business_city',
+          name: 'Город',
+        },
+        {
+          key: 'business_phone_number',
+          name: 'Телефон ресторана',
+        },
+        {
+          key: 'inspection_date',
+          name: 'Дата инстпекции',
+        },
+        {
+          key: 'inspection_description',
+          name: 'Статус инспекции',
+        },
+        {
+          key: 'inspection_type',
+          name: 'Тип проведения',
+        },
+      ],
     };
   },
   async mounted() {
@@ -44,38 +60,7 @@ export default {
       console.log(error);
     }
   },
-  methods: {
-    onSubmit() {
-      const {
-        name, address, city, date, description,
-      } = this.restaurant;
-
-      if (!name || !address || !city || !date || !description) {
-        this.messageValidation = 'Заполните все поля!';
-        return;
-      }
-
-      this.restaurants.push({
-        _id: {
-          $oid: Math.random()
-            .toString()
-            .slice(2, 8),
-        },
-        business_name: name,
-        business_address: address,
-        business_city: city,
-        inspection_date: date,
-        inspection_description: description,
-      });
-
-      this.restaurant.name = '';
-      this.restaurant.address = '';
-      this.restaurant.city = '';
-      this.restaurant.date = '';
-      this.restaurant.description = '';
-      this.messageValidation = '';
-    },
-  },
+  methods: {},
 };
 </script>
 

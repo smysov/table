@@ -5,12 +5,13 @@
       @search="search = $event"
       :isShowParameters="isShowParameters"
       :value="search"
+      :fields="fields"
     />
     <table class="table-info" @click="isShowParameters = false">
       <!--Header-->
-      <table-header />
+      <table-header :fields="fields" />
       <!--Body-->
-      <restaurants :restaurants="searchByParameters" @deleteInfo="deleteInfo" />
+      <restaurants :restaurants="searchByParameters" :fields="fields" />
       <!--Footer-->
       <table-footer :restaurants="searchByParameters" />
     </table>
@@ -24,7 +25,7 @@ import TableFooter from '@/components/TableFooter.vue';
 import HeaderOpportunities from '@/components/HeaderOpportunities.vue';
 
 export default {
-  name: 'Table',
+  name: 'MainTable',
   components: {
     Restaurants,
     TableHeader,
@@ -38,7 +39,11 @@ export default {
   props: {
     restaurants: {
       type: Array,
-      default: () => ([]),
+      required: true,
+    },
+    fields: {
+      type: Array,
+      required: true,
     },
   },
   computed: {
@@ -67,9 +72,6 @@ export default {
   methods: {
     onShowParameters() {
       this.isShowParameters = !this.isShowParameters;
-    },
-    deleteInfo(index) {
-      this.restaurants.splice(index, 1);
     },
   },
 };
@@ -100,11 +102,6 @@ export default {
     border-top: 1px solid rgba(0, 0, 0, 1);
     border-bottom: 3px solid rgba(0, 0, 0, 0.5);
 
-    &_delete {
-      font-weight: 700;
-      color: crimson;
-    }
-
     &::before {
       position: absolute;
       content: '';
@@ -121,7 +118,7 @@ export default {
     }
   }
 
-  &__descripthion {
+  &__description {
     position: relative;
     font-size: 20px;
     text-transform: uppercase;
@@ -149,19 +146,6 @@ export default {
     font-size: 16px;
     text-align: right;
     padding: 10px 30px 10px 0;
-  }
-
-  &__hide {
-    position: relative;
-    height: 25px;
-    width: 25px;
-    border: none;
-    border-radius: 50%;
-    background: url(../assets/images/cross-hide.svg) center center no-repeat;
-    background-color: crimson;
-    cursor: pointer;
-    outline-color: crimson;
-    outline-offset: 3px;
   }
 }
 </style>

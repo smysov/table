@@ -3,7 +3,7 @@
     <div class="wrapper__content">
       <section class="restaurants">
         <div class="container">
-          <main-table :restaurants="restaurants" />
+          <main-table v-bind="{ restaurants, fields }" />
         </div>
       </section>
     </div>
@@ -19,6 +19,36 @@ export default {
   data() {
     return {
       restaurants: [],
+      fields: [
+        {
+          key: 'business_name',
+          name: 'Название ресторана',
+        },
+        {
+          key: 'business_address',
+          name: 'Адрес ресторана',
+        },
+        {
+          key: 'business_city',
+          name: 'Город',
+        },
+        {
+          key: 'business_phone_number',
+          name: 'Телефон ресторана',
+        },
+        {
+          key: 'inspection_date',
+          name: 'Дата инстпекции',
+        },
+        {
+          key: 'inspection_description',
+          name: 'Статус инспекции',
+        },
+        {
+          key: 'inspection_type',
+          name: 'Тип проведения',
+        },
+      ],
     };
   },
   async mounted() {

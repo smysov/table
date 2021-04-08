@@ -1,20 +1,8 @@
 <template>
   <tbody>
     <tr v-for="restaurant of restaurants" :key="restaurant._id.$oid">
-      <td class="table-info__description">
-        {{ restaurant.business_name }}
-      </td>
-      <td class="table-info__description">
-        {{ restaurant.business_address }}
-      </td>
-      <td class="table-info__description">
-        {{ restaurant.business_city }}
-      </td>
-      <td class="table-info__description">
-        {{ restaurant.inspection_date }}
-      </td>
-      <td class="table-info__description">
-        {{ restaurant.inspection_description }}
+      <td class="table-info__description" v-for="field of fields" :key="field.key">
+        {{ restaurant[field.key] }}
       </td>
     </tr>
   </tbody>
@@ -26,7 +14,11 @@ export default {
   props: {
     restaurants: {
       type: Array,
-      default: () => ([]),
+      required: true,
+    },
+    fields: {
+      type: Array,
+      required: true,
     },
   },
 };

@@ -1,12 +1,12 @@
 <template>
   <ul class="edit-list">
-    <li class="edit-list__item">
+    <li class="edit-list__item" v-for="field of fields" :key="field.key">
       <div class="edit-list__wrapper-icon">
         <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
       </div>
-      <span class="edit-list__title">Название ресторана</span>
+      <span class="edit-list__title">{{ field.name }}</span>
     </li>
-    <li class="edit-list__item">
+    <!-- <li class="edit-list__item">
       <div class="edit-list__wrapper-icon">
         <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
       </div>
@@ -35,13 +35,19 @@
         <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
       </div>
       <span class="edit-list__title">Дата инспекции</span>
-    </li>
+    </li> -->
   </ul>
 </template>
 
 <script>
 export default {
   name: 'EditList',
+  props: {
+    fields: {
+      type: Array,
+      required: true,
+    },
+  },
 };
 </script>
 

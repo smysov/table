@@ -5,12 +5,13 @@
       @search="search = $event"
       :isShowParameters="isShowParameters"
       :value="search"
+      :fields="fields"
     />
     <table class="table-info" @click="isShowParameters = false">
       <!--Header-->
-      <table-header />
+      <table-header :fields="fields" />
       <!--Body-->
-      <restaurants :restaurants="searchByParameters" @deleteInfo="deleteInfo" />
+      <restaurants :restaurants="searchByParameters" :fields="fields" />
       <!--Footer-->
       <table-footer :restaurants="searchByParameters" />
     </table>
@@ -38,7 +39,11 @@ export default {
   props: {
     restaurants: {
       type: Array,
-      default: () => [],
+      required: true,
+    },
+    fields: {
+      type: Array,
+      required: true,
     },
   },
   computed: {

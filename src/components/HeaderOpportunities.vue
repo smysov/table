@@ -1,14 +1,12 @@
 <template>
   <div class="header-table">
-    <h2 class="header-table__title">
-      Инспекция по ресторанам
-    </h2>
+    <h2 class="header-table__title"> Инспекция по ресторанам </h2>
     <div class="button-wrapper">
       <button class="header-table__edit" @click="onShowParameters">
         Редактировать таблицу
       </button>
       <transition name="opacity">
-        <edit-list v-show="isShowParameters" />
+        <edit-list v-show="isShowParameters" :fields="fields"/>
       </transition>
     </div>
     <input
@@ -32,6 +30,10 @@ export default {
     },
     value: {
       type: String,
+      required: true,
+    },
+    fields: {
+      type: Array,
       required: true,
     },
   },

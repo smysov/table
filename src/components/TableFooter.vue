@@ -1,9 +1,9 @@
 <template>
   <tfoot>
     <tr>
-      <td class="table-info__quantity" colspan="6"
-        >Всего элементов: {{ restaurantsLength }}</td
-      >
+      <td class="table-info__quantity" colspan="7">
+        Всего элементов: {{ restaurantsLength }}
+      </td>
     </tr>
   </tfoot>
 </template>
@@ -14,7 +14,7 @@ export default {
   props: {
     restaurants: {
       type: Array,
-      default: () => ([]),
+      require: true,
     },
   },
   computed: {

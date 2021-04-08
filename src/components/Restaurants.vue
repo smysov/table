@@ -1,27 +1,8 @@
 <template>
   <tbody>
-    <tr v-for="(restaurant, index) of restaurants" :key="restaurant._id.$oid">
-      <td class="table-info__descripthion">
-        {{ restaurant.business_name }}
-      </td>
-      <td class="table-info__descripthion">
-        {{ restaurant.business_address }}
-      </td>
-      <td class="table-info__descripthion">
-        {{ restaurant.business_city }}
-      </td>
-      <td class="table-info__descripthion">
-        {{ restaurant.inspection_date }}
-      </td>
-      <td class="table-info__descripthion">
-        {{ restaurant.inspection_description }}
-      </td>
-      <td class="table-info__descripthion">
-        <button
-          @click="deleteInfo(index)"
-          class="table-info__hide"
-          aria-label="Скрыть"
-        ></button>
+    <tr v-for="restaurant of restaurants" :key="restaurant._id.$oid">
+      <td class="table-info__description" v-for="field of fields" :key="field.key">
+        {{ restaurant[field.key] }}
       </td>
     </tr>
   </tbody>
@@ -33,12 +14,11 @@ export default {
   props: {
     restaurants: {
       type: Array,
-      default: () => ([]),
+      required: true,
     },
-  },
-  methods: {
-    deleteInfo(index) {
-      this.$emit('deleteInfo', index);
+    fields: {
+      type: Array,
+      required: true,
     },
   },
 };

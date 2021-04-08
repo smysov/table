@@ -10,11 +10,22 @@
     />
     <table class="table-info">
       <!--Header-->
-      <table-header :fields="fields" />
+      <thead>
+        <table-header :fields="fields" />
+      </thead>
       <!--Body-->
-      <restaurants :restaurants="searchByParameters" :fields="fields" />
+      <tbody>
+        <restaurants
+          :fields="fields"
+          v-for="restaurant of searchByParameters"
+          :key="restaurant._id.$oid"
+          :restaurant="restaurant"
+        />
+      </tbody>
       <!--Footer-->
-      <table-footer :restaurants="searchByParameters" />
+      <tfoot>
+        <table-footer :restaurants="searchByParameters" />
+      </tfoot>
     </table>
   </div>
 </template>

@@ -1,11 +1,9 @@
 <template>
-  <thead>
-    <tr class="table-info">
-      <th class="table-info__title" v-for="field of visibleCell" :key="field.key">
-        {{ field.name }}
-      </th>
-    </tr>
-  </thead>
+  <tr class="table-info">
+    <th class="table-info__title" v-for="field of visibleCell" :key="field.key">
+      {{ field.name }}
+    </th>
+  </tr>
 </template>
 
 <script>

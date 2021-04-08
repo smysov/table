@@ -2,40 +2,10 @@
   <ul class="edit-list">
     <li class="edit-list__item" v-for="field of fields" :key="field.key">
       <div class="edit-list__wrapper-icon">
-        <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
+        <img class="edit-list__check" src="../assets/images/check.svg" alt="icon" />
       </div>
       <span class="edit-list__title">{{ field.name }}</span>
     </li>
-    <!-- <li class="edit-list__item">
-      <div class="edit-list__wrapper-icon">
-        <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
-      </div>
-      <span class="edit-list__title">Адрес ресторана</span>
-    </li>
-    <li class="edit-list__item">
-      <div class="edit-list__wrapper-icon">
-        <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
-      </div>
-      <span class="edit-list__title">Город</span>
-    </li>
-    <li class="edit-list__item">
-      <div class="edit-list__wrapper-icon">
-        <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
-      </div>
-      <span class="edit-list__title">Номер ресторана</span>
-    </li>
-    <li class="edit-list__item">
-      <div class="edit-list__wrapper-icon">
-        <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
-      </div>
-      <span class="edit-list__title">Статус инспекции</span>
-    </li>
-    <li class="edit-list__item">
-      <div class="edit-list__wrapper-icon">
-        <img class="edit-list__cross" src="../assets/images/check.svg" alt="icon" />
-      </div>
-      <span class="edit-list__title">Дата инспекции</span>
-    </li> -->
   </ul>
 </template>
 
@@ -73,7 +43,7 @@ export default {
     margin-right: 5px;
   }
 
-  &__cross {
+  &__check {
     width: 33px;
     height: 25px;
   }

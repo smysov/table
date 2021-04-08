@@ -1,13 +1,14 @@
 <template>
   <div class="table-wrapper">
     <header-opportunities
-      @onShowParameters="onShowParameters"
+      @hideShowCell="hideShowCell"
       @search="search = $event"
-      :isShowParameters="isShowParameters"
+      @onShowParameters="onShowParameters"
       :value="search"
       :fields="fields"
+      :isShowParameters="isShowParameters"
     />
-    <table class="table-info" @click="isShowParameters = false">
+    <table class="table-info">
       <!--Header-->
       <table-header :fields="fields" />
       <!--Body-->
@@ -33,7 +34,6 @@ export default {
     HeaderOpportunities,
   },
   data: () => ({
-    isShowParameters: false,
     search: '',
   }),
   props: {
@@ -43,6 +43,10 @@ export default {
     },
     fields: {
       type: Array,
+      required: true,
+    },
+    isShowParameters: {
+      type: Boolean,
       required: true,
     },
   },
@@ -70,8 +74,11 @@ export default {
     },
   },
   methods: {
+    hideShowCell(key) {
+      this.$emit('hideShowCell', key);
+    },
     onShowParameters() {
-      this.isShowParameters = !this.isShowParameters;
+      this.$emit('onShowParameters');
     },
   },
 };

@@ -6,7 +6,11 @@
         Редактировать таблицу
       </button>
       <transition name="opacity">
-        <edit-list v-show="isShowParameters" :fields="fields"/>
+        <edit-list
+          @hideShowCell="hideShowCell"
+          v-show="isShowParameters"
+          :fields="fields"
+        />
       </transition>
     </div>
     <input
@@ -22,12 +26,11 @@
 import EditList from '@/components/EditList.vue';
 
 export default {
-  name: 'Header',
+  name: 'MainHeader',
+  components: {
+    EditList,
+  },
   props: {
-    isShowParameters: {
-      type: Boolean,
-      required: true,
-    },
     value: {
       type: String,
       required: true,
@@ -36,17 +39,20 @@ export default {
       type: Array,
       required: true,
     },
+    isShowParameters: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
       search: this.value,
     };
   },
-  components: {
-    EditList,
-  },
-
   methods: {
+    hideShowCell(key) {
+      this.$emit('hideShowCell', key);
+    },
     onShowParameters() {
       this.$emit('onShowParameters');
     },
@@ -114,10 +120,10 @@ export default {
 }
 
 .opacity-enter-active {
-  transition: all 0.3s linear;
+  transition: all 0.2s linear;
 }
 .opacity-leave-active {
-  transition: all 0.3s linear;
+  transition: all 0.2s linear;
 }
 .opacity-enter,
 .opacity-leave-to {

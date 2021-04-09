@@ -17,7 +17,8 @@
       class="header-table__search"
       type="text"
       placeholder="Поиск по полям таблицы"
-      v-model="search"
+      :value="searchQuery"
+      @input="searchInput"
     />
   </div>
 </template>
@@ -31,16 +32,16 @@ export default {
     EditList,
   },
   props: {
-    value: {
-      type: String,
-      required: true,
-    },
     fields: {
       type: Array,
       required: true,
     },
     isShowParameters: {
       type: Boolean,
+      required: true,
+    },
+    searchQuery: {
+      type: String,
       required: true,
     },
   },
@@ -56,10 +57,8 @@ export default {
     onShowParameters() {
       this.$emit('onShowParameters');
     },
-  },
-  watch: {
-    search(value) {
-      this.$emit('search', value);
+    searchInput(e) {
+      this.$emit('searchInput', e.target.value);
     },
   },
 };

@@ -2,11 +2,9 @@
   <div class="table-wrapper">
     <header-opportunities
       @hideShowCell="hideShowCell"
-      @search="search = $event"
       @onShowParameters="onShowParameters"
-      :value="search"
-      :fields="fields"
-      :isShowParameters="isShowParameters"
+      @searchInput="performSearch"
+      v-bind="{ fields, isShowParameters, searchQuery }"
     />
     <table class="table-info">
       <!--Header-->
@@ -17,14 +15,14 @@
       <tbody>
         <restaurants
           :fields="fields"
-          v-for="restaurant of searchByParameters"
+          v-for="restaurant of visibleRestaurants"
           :key="restaurant._id.$oid"
           :restaurant="restaurant"
         />
       </tbody>
       <!--Footer-->
       <tfoot>
-        <table-footer :restaurants="searchByParameters" />
+        <table-footer :count="count" />
       </tfoot>
     </table>
   </div>
@@ -45,7 +43,8 @@ export default {
     HeaderOpportunities,
   },
   data: () => ({
-    search: '',
+    searchQuery: '',
+    searchResults: [],
   }),
   props: {
     restaurants: {
@@ -62,26 +61,11 @@ export default {
     },
   },
   computed: {
-    searchByParameters() {
-      const { search, restaurants } = this;
-      const value = search.trim().toUpperCase();
-
-      if (!search) return restaurants;
-
-      const sortedRestaurants = restaurants.filter((item) => {
-        if (
-          item.business_name.indexOf(value) !== -1
-          || item.business_address.indexOf(value) !== -1
-          || item.business_city.indexOf(value) !== -1
-          || item.business_phone_number.indexOf(value) !== -1
-          || item.inspection_date.indexOf(value) !== -1
-          || item.inspection_description.indexOf(value) !== -1
-        ) {
-          return item;
-        }
-      });
-
-      return sortedRestaurants;
+    visibleRestaurants() {
+      return this.searchQuery === '' ? this.restaurants : this.searchResults;
+    },
+    count() {
+      return this.visibleRestaurants.length;
     },
   },
   methods: {
@@ -90,6 +74,21 @@ export default {
     },
     onShowParameters() {
       this.$emit('onShowParameters');
+    },
+    performSearch(searchQuery) {
+      this.searchQuery = searchQuery;
+      const value = this.searchQuery.trim().toLowerCase();
+
+      this.searchResults = this.restaurants.filter((item) => {
+        let showItem = false;
+
+        this.fields.forEach((field) => {
+          if (field.visible && !showItem) {
+            showItem = item[field.key].toLowerCase().includes(value);
+          }
+        });
+        return showItem;
+      });
     },
   },
 };

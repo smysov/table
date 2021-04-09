@@ -1,8 +1,6 @@
 <template>
   <tr>
-    <td class="table-info__quantity" colspan="7">
-      Всего элементов: {{ restaurantsLength }}
-    </td>
+    <td class="table-info__quantity" colspan="7"> Всего элементов: {{ count }} </td>
   </tr>
 </template>
 
@@ -10,14 +8,9 @@
 export default {
   name: 'TableFooter',
   props: {
-    restaurants: {
-      type: Array,
+    count: {
+      type: Number,
       require: true,
-    },
-  },
-  computed: {
-    restaurantsLength() {
-      return this.restaurants.length;
     },
   },
 };

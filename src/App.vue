@@ -3,9 +3,11 @@
     <div class="wrapper__content">
       <section class="restaurants">
         <div class="container">
-          <main-table v-bind="{ restaurants, fields, isShowParameters }"
+          <main-table v-bind="{ fields, isShowParameters }"
+            :restaurants="performSorting"
             @hideShowCell="hideShowCell"
-            @onShowParameters="onShowParameters" />
+            @onShowParameters="onShowParameters"
+            @sort="sort" />
         </div>
       </section>
     </div>
@@ -65,6 +67,8 @@ export default {
       ],
       isShowModal: false,
       isShowParameters: false,
+      currentSortName: 'business_name',
+      currentSortDir: 'asc',
     };
   },
   async mounted() {
@@ -93,6 +97,25 @@ export default {
     },
     onShowParameters() {
       this.isShowParameters = !this.isShowParameters;
+    },
+    sort(key) {
+      if (this.currentSortName === key) {
+        this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
+      }
+      this.currentSortName = key;
+    },
+    sortingRestaurants() {
+      return this.restaurants.sort((a, b) => {
+        if (this.currentSortDir === 'desc') return -1;
+        if (a[this.currentSortName] < b[this.currentSortName]) return -1;
+        if (a[this.currentSortName] > b[this.currentSortName]) return 1;
+        return 0;
+      });
+    },
+  },
+  computed: {
+    performSorting() {
+      return this.sortingRestaurants();
     },
   },
 };

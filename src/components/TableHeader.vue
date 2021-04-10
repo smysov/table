@@ -1,6 +1,9 @@
 <template>
   <tr class="table-info">
-    <th class="table-info__title" v-for="field of visibleCell" :key="field.key">
+    <th class="table-info__title"
+      @click="sort(field.key)"
+      v-for="(field, index) of visibleCell"
+      :key="index">
       {{ field.name }}
     </th>
   </tr>
@@ -18,6 +21,11 @@ export default {
   computed: {
     visibleCell() {
       return this.fields.filter((item) => item.visible === true);
+    },
+  },
+  methods: {
+    sort(key) {
+      this.$emit('sort', key);
     },
   },
 };

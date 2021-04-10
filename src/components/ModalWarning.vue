@@ -1,8 +1,11 @@
 <template>
-  <div class="modal" @click="onHideModal">
-    <div class="modal__content" @click.stop="">
-      <h2 class="modal__title"> Должно быть минимум три столбца! </h2>
-      <button class="modal__button" @click="onHideModal">Ясно! Понятно!</button>
+  <div class="modal"
+    @click="onHideModal">
+    <div class="modal__content"
+      @click.stop="">
+      <h2 class="modal__title"> Должен быть минимум один столбец! </h2>
+      <button class="modal__button"
+        @click="onHideModal">Ок</button>
     </div>
   </div>
 </template>

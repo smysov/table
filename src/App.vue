@@ -3,16 +3,15 @@
     <div class="wrapper__content">
       <section class="restaurants">
         <div class="container">
-          <main-table
-            v-bind="{ restaurants, fields, isShowParameters }"
+          <main-table v-bind="{ restaurants, fields, isShowParameters }"
             @hideShowCell="hideShowCell"
-            @onShowParameters="onShowParameters"
-          />
+            @onShowParameters="onShowParameters" />
         </div>
       </section>
     </div>
     <transition name="scale">
-      <modal-warning @onHideModal="onHideModal" v-show="isShowModal" />
+      <modal-warning @onHideModal="onHideModal"
+        v-show="isShowModal" />
     </transition>
   </div>
 </template>
@@ -83,7 +82,7 @@ export default {
       this.fields[findIndex].visible = !this.fields[findIndex].visible;
       const limit = this.fields.filter((item) => item.visible === false);
 
-      if (limit.length > 4) {
+      if (limit.length > 6) {
         this.fields[findIndex].visible = true;
         this.isShowModal = true;
         this.isShowParameters = false;

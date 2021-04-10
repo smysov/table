@@ -1,24 +1,21 @@
 <template>
   <div class="table-wrapper">
-    <header-opportunities
-      @hideShowCell="hideShowCell"
+    <header-opportunities @hideShowCell="hideShowCell"
       @onShowParameters="onShowParameters"
       @searchInput="performSearch"
-      v-bind="{ fields, isShowParameters, searchQuery }"
-    />
+      v-bind="{ fields, isShowParameters, searchQuery }" />
     <table class="table-info">
       <!--Header-->
       <thead>
-        <table-header :fields="fields" />
+        <table-header @sort="sort"
+          :fields="fields" />
       </thead>
       <!--Body-->
       <tbody>
-        <restaurants
-          :fields="fields"
+        <restaurants :fields="fields"
           v-for="restaurant of visibleRestaurants"
           :key="restaurant._id.$oid"
-          :restaurant="restaurant"
-        />
+          :restaurant="restaurant" />
       </tbody>
       <!--Footer-->
       <tfoot>
@@ -90,6 +87,9 @@ export default {
         return showItem;
       });
     },
+    sort(key) {
+      this.$emit('sort', key);
+    },
   },
 };
 </script>
@@ -118,10 +118,16 @@ export default {
     color: #000;
     border-top: 1px solid rgba(0, 0, 0, 1);
     border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    cursor: pointer;
+
+    &:hover {
+      color: #7387b3;
+    }
 
     &::before {
       position: absolute;
-      content: '';
+      content: "";
       top: 50%;
       right: 0;
       height: 40px;
@@ -145,7 +151,7 @@ export default {
 
     &::before {
       position: absolute;
-      content: '';
+      content: "";
       top: 50%;
       right: 0;
       height: 40px;

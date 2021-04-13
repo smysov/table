@@ -1,6 +1,7 @@
 <template>
   <tr>
-    <td class="table-info__quantity" colspan="7"> Всего элементов: {{ count }} </td>
+    <td class="table-info__quantity"
+        colspan="7"> Всего элементов: {{ count }} </td>
   </tr>
 </template>
 

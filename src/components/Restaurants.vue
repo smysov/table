@@ -1,7 +1,9 @@
 <template>
   <tr :style="setBackgroundByStatus">
     <template v-for="field of fields">
-      <td class="table-info__description" v-if="field.visible" :key="field.key">
+      <td class="table-info__description"
+          v-if="field.visible"
+          :key="field.key">
         {{ restaurant[field.key] }}
       </td>
     </template>

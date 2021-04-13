@@ -1,21 +1,20 @@
 <template>
   <div class="table-wrapper">
     <header-opportunities @hideShowCell="hideShowCell"
-      @onShowParameters="onShowParameters"
-      @searchInput="performSearch"
-      v-bind="{ fields, isShowParameters, searchQuery }" />
+                          @searchInput="performSearch"
+                          v-bind="{ fields, searchQuery }" />
     <table class="table-info">
       <!--Header-->
       <thead>
         <table-header @sort="sort"
-          :fields="fields" />
+                      :fields="fields" />
       </thead>
       <!--Body-->
       <tbody>
         <restaurants :fields="fields"
-          v-for="restaurant of visibleRestaurants"
-          :key="restaurant._id.$oid"
-          :restaurant="restaurant" />
+                     v-for="restaurant of visibleRestaurants"
+                     :key="restaurant._id.$oid"
+                     :restaurant="restaurant" />
       </tbody>
       <!--Footer-->
       <tfoot>
@@ -52,10 +51,6 @@ export default {
       type: Array,
       required: true,
     },
-    isShowParameters: {
-      type: Boolean,
-      required: true,
-    },
   },
   computed: {
     visibleRestaurants() {
@@ -68,9 +63,6 @@ export default {
   methods: {
     hideShowCell(key) {
       this.$emit('hideShowCell', key);
-    },
-    onShowParameters() {
-      this.$emit('onShowParameters');
     },
     performSearch(searchQuery) {
       this.searchQuery = searchQuery;

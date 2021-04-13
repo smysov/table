@@ -1,25 +1,23 @@
 <template>
   <div class="header-table">
     <h2 class="header-table__title"> Инспекция по ресторанам </h2>
-    <div class="button-wrapper">
-      <button class="header-table__edit" @click="onShowParameters">
+    <div class="button-wrapper"
+         ref="listParameters">
+      <button class="header-table__edit"
+              @click="isShowParameters = !isShowParameters">
         Редактировать таблицу
       </button>
       <transition name="opacity">
-        <edit-list
-          @hideShowCell="hideShowCell"
-          v-show="isShowParameters"
-          :fields="fields"
-        />
+        <edit-list @hideShowCell="hideShowCell"
+                   v-show="isShowParameters"
+                   :fields="fields" />
       </transition>
     </div>
-    <input
-      class="header-table__search"
-      type="text"
-      placeholder="Поиск по полям таблицы"
-      :value="searchQuery"
-      @input="searchInput"
-    />
+    <input class="header-table__search"
+           type="text"
+           placeholder="Поиск по полям таблицы"
+           :value="searchQuery"
+           @input="searchInput" />
   </div>
 </template>
 
@@ -36,10 +34,6 @@ export default {
       type: Array,
       required: true,
     },
-    isShowParameters: {
-      type: Boolean,
-      required: true,
-    },
     searchQuery: {
       type: String,
       required: true,
@@ -48,17 +42,23 @@ export default {
   data() {
     return {
       search: this.value,
+      isShowParameters: false,
     };
+  },
+  mounted() {
+    document.body.addEventListener('click', this.hideListParameters);
   },
   methods: {
     hideShowCell(key) {
       this.$emit('hideShowCell', key);
     },
-    onShowParameters() {
-      this.$emit('onShowParameters');
-    },
     searchInput(e) {
       this.$emit('searchInput', e.target.value);
+    },
+    hideListParameters({ target }) {
+      if (!this.$refs.listParameters.contains(target)) {
+        this.isShowParameters = false;
+      }
     },
   },
 };

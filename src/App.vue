@@ -3,28 +3,22 @@
     <div class="wrapper__content">
       <section class="restaurants">
         <div class="container">
-          <main-table v-bind="{ fields, isShowParameters }"
-            :restaurants="performSorting"
-            @hideShowCell="hideShowCell"
-            @onShowParameters="onShowParameters"
-            @sort="sort" />
+          <main-table :fields="fields"
+                      :restaurants="performSorting"
+                      @hideShowCell="hideShowCell"
+                      @sort="sort" />
         </div>
       </section>
     </div>
-    <transition name="scale">
-      <modal-warning @onHideModal="onHideModal"
-        v-show="isShowModal" />
-    </transition>
   </div>
 </template>
 
 <script>
 import MainTable from '@/components/Table.vue';
-import ModalWarning from '@/components/ModalWarning.vue';
 
 export default {
   name: 'App',
-  components: { MainTable, ModalWarning },
+  components: { MainTable },
   data() {
     return {
       restaurants: [],
@@ -65,8 +59,6 @@ export default {
           visible: true,
         },
       ],
-      isShowModal: false,
-      isShowParameters: false,
       currentSortName: 'business_name',
       currentSortDir: 'asc',
     };
@@ -88,15 +80,7 @@ export default {
 
       if (limit.length > 6) {
         this.fields[findIndex].visible = true;
-        this.isShowModal = true;
-        this.isShowParameters = false;
       }
-    },
-    onHideModal() {
-      this.isShowModal = false;
-    },
-    onShowParameters() {
-      this.isShowParameters = !this.isShowParameters;
     },
     sort(key) {
       if (this.currentSortName === key) {
@@ -126,19 +110,5 @@ export default {
   min-height: 100vh;
   display: flex;
   align-items: center;
-}
-
-.scale-enter-active {
-  transition: all 0.4s ease-out;
-}
-
-.scale-leave-active {
-  transition: all 0.2s ease-out;
-}
-
-.scale-enter,
-.scale-leave-to {
-  transform: scale(1.1);
-  opacity: 0.6;
 }
 </style>

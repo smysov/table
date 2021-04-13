@@ -1,24 +1,18 @@
 <template>
   <ul class="edit-list">
-    <li
-      class="edit-list__item"
-      v-for="field of fields"
-      :key="field.key"
-      @click="hideShowCell(field.key)"
-    >
+    <li class="edit-list__item"
+        v-for="field of fields"
+        :key="field.key"
+        @click="hideShowCell(field.key)">
       <div class="edit-list__wrapper-icon">
-        <img
-          class="edit-list__check"
-          src="../assets/images/check.svg"
-          alt="icon"
-          v-if="field.visible"
-        />
-        <img
-          class="edit-list__cross"
-          src="../assets/images/cross-hide.svg"
-          alt="icon"
-          v-else
-        />
+        <img class="edit-list__check"
+             src="../assets/images/check.svg"
+             alt="icon"
+             v-if="field.visible" />
+        <img class="edit-list__cross"
+             src="../assets/images/cross-hide.svg"
+             alt="icon"
+             v-else />
       </div>
       <span class="edit-list__title">{{ field.name }}</span>
     </li>

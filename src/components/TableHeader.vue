@@ -1,9 +1,9 @@
 <template>
   <tr class="table-info">
     <th class="table-info__title"
-      @click="sort(field.key)"
-      v-for="(field, index) of visibleCell"
-      :key="index">
+        @click="sort(field.key)"
+        v-for="(field, index) of visibleCell"
+        :key="index">
       {{ field.name }}
     </th>
   </tr>
